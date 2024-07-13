@@ -1,0 +1,59 @@
+
+<section >
+    <div class="container mt-5">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+       
+        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="text-center mb-4">
+                    <h1 class="mb-3 lgTitle">Login</h1>
+                </div>
+    
+                <div class="form-floating">
+                    <input [class.is-invalid]="loginForm.get('email')?.invalid&&loginForm.get('email')?.touched" type="email" formControlName="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
+                    <label for="floatingEmail">Email Address</label>
+                    <div *ngIf="loginForm.get('email')?.errors?.['required']" class="invalid-feedback">Email is required</div>
+                </div>
+    
+                <div class="form-floating mt-3">
+                    <input [class.is-invalid]="loginForm.get('password')?.invalid&&loginForm.get('password')?.touched"
+                    [type]="showPassword ? 'text' : 'password'"
+                      formControlName="password"
+                       class="form-control" id="floatingPassword" placeholder="Password">
+
+                    <label for="floatingPassword">Password</label>
+                    <div *ngIf="loginForm.get('password')?.errors?.['required']" class="invalid-feedback">password is required</div>
+                </div>
+                <div class="form-check mt-2">
+                  <input class="form-check-input" 
+                         type="checkbox" 
+                         (change)="togglePasswordVisibility()" 
+                         id="showPasswordCheckbox">
+                  <label class="form-check-label" for="showPasswordCheckbox">
+                      Show Password
+                  </label>
+                </div>
+                  <button  [disabled]="loginForm.invalid" class="w-100 btn btn-lg btn-primary mt-3" type="submit">sumbit</button>  
+
+                <div style="display: flex;justify-content: space-between;">
+                  <div>
+                    <a class="d-flex justify-content-center mt-3" style="text-decoration: none; border-bottom: 1px solid #0d6efd;" routerLink="/register">Register</a>
+                  </div>
+
+                  <div>
+                  </div>
+                </div>
+                  
+          </form>
+          
+        </div>
+
+        <div class="col-md-8 col-lg-7 col-xl-6 p-5">
+            <img src="../../../../assets/images/footerlogo.png"
+            class="img-fluid" alt="Phone image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  

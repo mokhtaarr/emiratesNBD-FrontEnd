@@ -1,0 +1,7 @@
+export const environment = {
+    production: false,
+    // apiUrl : "https://localhost:7092/api/",
+    apiUrl : "http://emirates-api.softgoegypt.com/api/",
+  
+  
+  };

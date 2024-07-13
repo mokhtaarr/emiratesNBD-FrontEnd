@@ -1,0 +1,250 @@
+<div class="container-fluid mt-5">
+
+    <div class="d-flex p-3 rounded shadow-sm" style="background-color: white; justify-content: center;">
+        <h1 style="margin: inherit;"> <i  style="color: #182f7c;" class="fas fa-users custom-icon"></i> Emirates Customers  </h1>
+    </div>
+
+    <div style="margin-bottom: 50px;">
+        <form [formGroup]="customerForm"   (ngSubmit)="onSumbit()" >
+          <div class="row p-3" >
+            <div class="col-lg-6 col-md-6 col-sm-12"  >
+              <div class="example-button-row">
+                <div class="example-flex-container">
+        
+                    <div class="example-button-container">
+                        <button type="button" (click)="New()" mat-mini-fab color="primary"
+                          aria-label="Example icon button with a menu icon">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                 
+                  <div class="example-button-container">
+                    <button type="button" mat-mini-fab color="primary"  (click)="GetAllCustomers()"
+                      [disabled]="reloadDisabled" aria-label="Example icon button with a menu icon">
+                      <i class="fas fa-sync"></i>
+                    </button>
+                  </div>
+        
+
+                  <div class="example-button-container">
+                    <button type="submit" mat-mini-fab color="primary" [disabled]=" SaveDisable || customerForm.invalid" 
+                      aria-label="Example icon button with a menu icon">
+                      <i class="fas fa-save"></i>
+                    </button>
+                  </div>
+        
+                  <div class="example-button-container">
+                    <button type="button" mat-mini-fab color="warn" [disabled]=" DeleteDisable || customerForm.invalid" 
+                    (click)="Open_delete_confirm()"
+                      
+                       aria-label="Example icon button with a menu icon">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+        
+                  <div class="example-button-container">
+                    <button type="button" mat-mini-fab color="primary" (click)="undo()" [disabled]="UndoDisabled"
+                      aria-label="Example icon button with a menu icon">
+                      <i class="fas fa-undo"></i>
+                    </button>
+                  </div>
+        
+                  <div class="example-button-container">
+                    <button type="button" mat-mini-fab  [disabled]="UpdateDisable" (click)="updatecustomer()" color="primary"
+                      aria-label="Example icon button with a menu icon">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </div>
+        
+        
+                  
+
+                  <div class="example-button-container">
+                    <button type="button" mat-mini-fab color="primary" (click)="getLastRowData()" [disabled]="lastRow"
+                      aria-label="Example icon button with a menu icon">
+                      <i class="fas fa-step-backward"></i>
+                    </button>
+                  </div>
+        
+                  <div class="example-button-container">
+                    <button type="button" mat-mini-fab color="primary" (click)="getNextRowData()"
+                      [disabled]="DisabledNextButton" aria-label="Example icon button with a menu icon">
+                      <i class="fas fa-caret-left"></i>
+                    </button>
+                  </div>
+
+                  <div class="example-button-container">
+                    <button type="button" mat-mini-fab color="primary" (click)="getPrevRowData()"
+                      [disabled]="DisabledPrevButton" aria-label="Example icon button with a menu icon">
+                      <i class="fas fa-caret-right"></i>
+                    </button>
+                  </div>
+        
+                  <div class="example-button-container">
+                    <button type="button" mat-mini-fab (click)="getFirstRowData()" [disabled]="firstRow" color="primary"
+                      aria-label="Example icon button with a menu icon">
+                      <i class="fas fa-step-forward"></i>
+                    </button>
+                  </div>
+        
+        
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-12"  ></div>
+            <div class="col-lg-3 col-md-6 col-sm-12"  >
+              <div class="mt-2 d-flex">
+                <h1 style="color: #3f51b5;" *ngIf="customerForm.value.customerDescA"> 
+                    {{customerForm.value.customerDescE}} / {{customerForm.value.customerDescA}}
+                </h1>
+            </div>
+            </div>
+          </div>
+           
+        
+            <mat-tab-group  style="background-color: white;font-family: system-ui;">
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        
+                        <h2><i style="color: #3f51b5;" class="fas fa-database custom-icon"></i>  Customers Data</h2>
+                    </ng-template>
+
+                    <div class="row p-3">
+
+                        <div class="col-lg-3 col-md-6 col-sm-12 input-mrg-top select-margin-bottom"
+                            style="display: none;">
+
+                            <mat-form-field class="ang-maturial-select" appearance="outline">
+                                <mat-label>Id</mat-label>
+                                <input matInput type="number" formControlName="customerId">
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12 input-mrg-top select-margin-bottom">
+
+                            <mat-form-field class="ang-maturial-select" appearance="outline">
+                                <mat-label>Customer Code</mat-label>
+                                <input matInput type="text" formControlName="customerCode" [readonly]="EditReadonly" >
+                                <mat-hint style="color: red;" 
+                                *ngIf="customerForm.get('customerCode')?.invalid&&customerForm.get('customerCode')?.touched"  >
+                                   Customer Code Is Required
+                                </mat-hint>
+                            </mat-form-field>
+
+                        </div>
+
+                     
+                        <div class="col-lg-3 col-md-6 col-sm-12 input-mrg-top select-margin-bottom">
+
+                            <mat-form-field class="ang-maturial-select" appearance="outline">
+                                <mat-label>Arabic Name</mat-label>
+                                <input matInput type="text" formControlName="customerDescA">
+                                <mat-hint style="color: red;" 
+                                *ngIf="customerForm.get('customerDescA')?.invalid&&customerForm.get('customerDescA')?.touched"  >
+                                  Arabic Name Is Required
+                                </mat-hint>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12 input-mrg-top select-margin-bottom">
+
+                            <mat-form-field class="ang-maturial-select" appearance="outline">
+                                <mat-label>English Name</mat-label>
+                                <input matInput type="text" formControlName="customerDescE">
+                                <mat-hint style="color: red;" 
+                                *ngIf="customerForm.get('customerDescE')?.invalid&&customerForm.get('customerDescE')?.touched"  >
+                                  English Name Is Required
+                                </mat-hint>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12 input-mrg-top select-margin-bottom">
+
+                            <mat-form-field class="ang-maturial-select" appearance="outline">
+                                <mat-label>Email</mat-label>
+                                <input matInput type="text" formControlName="email">
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12 mt-1">
+
+                            <mat-form-field class="ang-maturial-select input-mrg-top" appearance="outline">
+                                <mat-label>Remarks</mat-label>
+                                <input matInput type="text" formControlName="remarks">
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12 input-mrg-top mt-4">
+                            <mat-slide-toggle  color="primary" formControlName="isActive">IsActive</mat-slide-toggle>
+                        </div>
+                       
+                        
+                    </div>
+
+                </mat-tab>
+            </mat-tab-group>
+        </form>
+    </div>
+
+
+    <mat-card style="margin-bottom: 100px;">
+        <mat-card-header class="justify-content-center">
+            <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label style="text-align: right;padding: 3px;"> <i class="fas fa-search"></i>Search</mat-label>
+                <input matInput (keyup)="Filterchange($event)" />
+            </mat-form-field>
+        </mat-card-header> <mat-card-content>
+
+            <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="isActive">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>IsActive</th>
+                    <td mat-cell *matCellDef="let element">
+                        <p><mat-slide-toggle color="primary" [checked]="element.isActive"></mat-slide-toggle></p>
+
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="customerCode">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Customer Code</th>
+                    <td mat-cell *matCellDef="let element"> {{element.customerCode}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="customerDescA">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Arabic Name</th>
+                    <td mat-cell *matCellDef="let element"> {{element.customerDescA}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="customerDescE">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>English Name</th>
+                    <td mat-cell *matCellDef="let element"> {{element.customerDescE}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="remarks">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Remarks</th>
+                    <td mat-cell *matCellDef="let element"> {{element.remarks}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="fillForm(row)" ></tr>
+            </table>
+
+        </mat-card-content>
+        <mat-card-footer>
+            <mat-paginator [pageSizeOptions]="[20,50,100,200]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </mat-card-footer>
+    </mat-card>
+</div>

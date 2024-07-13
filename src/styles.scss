@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+::-webkit-scrollbar {
+    width: 10px; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #979797; 
+    border-radius: 5px; 
+
+}
+
+.mdc-text-field--disabled {
+    .mdc-text-field__input{
+        color: black;
+    }
+    mat-label{
+        color: black;
+        background-color: #d8d8d8;
+       }
+   background-color:#d8d8d8;
+   cursor: not-allowed !important;
+  }

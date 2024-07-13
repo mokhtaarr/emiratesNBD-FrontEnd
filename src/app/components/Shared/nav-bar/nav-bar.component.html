@@ -1,0 +1,59 @@
+<div class="container d-flex flex-wrap">
+  <ul class="nav me-auto">
+    <li class="nav-item" style="background-color:#fdb712;color: black;font-weight:700"><a routerLink="/"
+        class="nav-link link-dark  active" aria-current="page">HOME</a></li>
+    <li class="nav-item"><a href="https://github.com/mokhtaarr/emiratesNBD-BackEnd" class="nav-link link-dark ">Back-End GitHub</a></li>
+    <li class="nav-item"><a routerLink="/" class="nav-link link-dark ">FrontEnd GitHub </a></li>
+    <li class="nav-item"><a routerLink="/" class="nav-link link-dark ">PRIORITY</a></li>
+    <li class="nav-item"><a routerLink="/" class="nav-link link-dark ">BUSINESS</a></li>
+    <li class="nav-item"><a routerLink="/" class="nav-link link-dark ">CORPORATE</a></li>
+    <li class="nav-item"><a routerLink="/" class="nav-link link-dark ">E-BANKING SERVICES</a></li>
+    <li class="nav-item"><a routerLink="/" class="nav-link link-dark ">ABOUT US</a></li>
+    <li class="nav-item"><a routerLink="/" class="nav-link link-dark ">CAREERS</a></li>
+  </ul>
+  <ng-container>
+    <ul class="nav" *ngIf="(accountService.currentUser$ | async) == null">
+      <li class="nav-item"><a routerLink="/login" class="nav-link link-dark px-2" 
+        style="background-color:#fdb712;color: black;font-weight: 700;">Login</a></li>
+        
+      <li class="nav-item" ><a routerLink="/register"
+          class="nav-link link-dark px-2">Sign up</a></li>
+    </ul>
+  </ng-container>
+
+
+  <ng-container>
+    <ul class="nav me-auto" *ngIf="accountService.currentUser$ | async as user">
+      <li class="nav-item" style="background-color:#fdb712;color: black;font-weight:700">
+        <a href="" class="nav-link link-dark  active" aria-current="page"> welcome {{user.displayName}}</a>
+      </li>
+
+      <li class="nav-item"><a (click)="accountService.logout()" style="cursor: pointer;" class="nav-link link-dark px-2">
+          <i class="fa fa-sign-out"></i> Logout</a>
+      </li>
+
+    </ul>
+
+  </ng-container>
+
+
+</div>
+<nav class="navbar navbar-expand-lg sticky-navbar" style="background-color: #182f7c;">
+  <div class="container">
+    <img routerLink="/" src="../../../assets/images/emiratesnbd_new_logo.gif" width="150" height="40">
+    <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" style="padding: revert">
+        <li><a routerLink="/Emirates-Customers" class="nav-link px-2 hearWordColor">Customers</a></li>
+      </ul>
+      <form class="d-flex" role="search">
+        <p class="nav-link px-2 text-white mt-2"> <img src="../../../../assets/images/flag-egypt.png" width="40"
+            height="20" />
+          Choose your website / عربى
+      </form>
+    </div>
+  </div>
+</nav>

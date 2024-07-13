@@ -1,0 +1,75 @@
+.banner-slider__title {
+    margin-bottom: 0.75rem;
+    font-size: 2.625rem;
+    line-height: 3rem;
+    color: white; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+    font-weight: 100;
+    z-index: 100;
+
+}
+
+
+.btn{
+ background-color: #182f7c;
+ color: white;
+ padding: 15px;
+ font-size: 16px;
+ border-radius: 10px;
+
+}
+
+.carousel-item {
+    position: relative;
+  }
+  
+  .carousel-item .gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.8) 11%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    z-index: 1; 
+  }
+  
+  .carousel-item img {
+    position: relative;
+    z-index: 0;
+  }
+  
+  .carousel-caption {
+    z-index: 2; 
+  }
+  
+  @media (max-width: 768px) {
+    .banner-slider__title {
+      font-size: 1rem; 
+    }
+    .carousel-indicators{
+        display: none;
+    }
+
+    .btn {
+        font-size: 1rem; 
+        padding: 0.75rem 1.5rem;
+      }
+  }
+
+  @media (min-width: 768px) {
+    .banner-slider__title {
+        font-size: 2.625rem;
+    }
+
+   
+  }
+
+  .btn:hover{
+    background-color: #122254;
+  }
+
